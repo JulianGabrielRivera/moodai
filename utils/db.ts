@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@/app/generated/prisma";
+import { PrismaClient } from "@/app/generated/prisma";
 
 // fancy way to typescript coerce so that you can then convert it to whatever you want
 const globalForPrisma = globalThis as unknown as {
@@ -6,6 +6,7 @@ const globalForPrisma = globalThis as unknown as {
 }
 
 export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+    // logs this in server
     log:['query'],
 })
 
