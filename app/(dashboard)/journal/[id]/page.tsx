@@ -1,7 +1,7 @@
 import Editor from "@/components/Editor"
+import { analyze } from "@/utils/ai"
 import { getUserByClerkID } from "@/utils/auth"
 import { prisma } from "@/utils/db"
-
 
 const getEntry = async (id) => {
     const user = await getUserByClerkID()
@@ -16,6 +16,14 @@ const getEntry = async (id) => {
         }
     })
 
+    const analysis = await analyze(entry.content)
+    await prisma.analysis.create({
+        data:{
+            entryId: entry.id,
+            ...analysis
+
+        },
+    })
     return entry
 }
 const EntryPage = async ({params}) =>{

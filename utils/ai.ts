@@ -24,7 +24,6 @@ const getPrompt = async (content) => {
  const input = await prompt.format({
     entry: content,
  })
- console.log(input)
  return input
 }
 
@@ -33,6 +32,12 @@ export const analyze = async(content)=>{
     // temperature describes the variance and randomness the outputs can be. high temp creative but higher chances of hallucination, low temp not creative but its more factual/real
 const model = new ChatOpenAI({temperature:0, modelName:'gpt-3.5-turbo'})
 const result = await model.invoke(input)
-console.log(result)
+
+try{
+    return parser.parse(result.content)
+}
+catch(e){
+console.log(e)
+}
 
 }

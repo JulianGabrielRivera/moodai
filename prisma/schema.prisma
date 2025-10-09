@@ -54,6 +54,7 @@ model Analysis {
   summary  String  @db.Text
   color    String
   negative Boolean
+  subject  String
 
   // we probably need this in all because if youre querying without index, you're scanning the whole table which is bad.
   @@unique([entryId])
