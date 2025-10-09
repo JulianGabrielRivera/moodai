@@ -38,7 +38,8 @@ model JournalEntry {
   // one to one relationship analysis has one journal and journal has one analysis. has to have an optional because then we wont be able to create journal from start 
   analysis Analysis?
 
-  @@index([userId])
+  // compound index, combo of two things
+  @@unique([userId, id])
 }
 
 model Analysis {
